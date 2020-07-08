@@ -1,0 +1,71 @@
+# Edit this file with your answers to the "Much Ado About Nothing"
+# problem.
+#
+# The object parser accepts a limited set of syntax. Every set must be
+# specified by writing out curly braces with the contents contained
+# within those braces. The good news is that, with the exception of
+# infinite sets and the empty set, this perfectly matches the notation
+# used in discrete mathematics. For example, the set {1, 2, 3} would be
+# written out as just that: {1, 2, 3}. You can nest sets as well, so
+# sets like {1, {2, {3, 4}}} are perfectly fine.
+#
+# To write out the empty set, write {}, a set containing no elements.
+#
+# We unfortunately don't support set-builder notation, set operations
+# like union, intersection, powerset, etc. We also don't support
+# infinite sets.
+#
+# All whitespace is ignored. Any text after a hash mark (#) on a line
+# is treated as a comment and ignored.
+
+[Part (i)]
+
+# $\emptyset \cup \{\emptyset\}$ = The set containing the empty set
+
+{{}}
+
+
+
+[Part (ii)]
+
+# $\emptyset \cap \{\emptyset\}$ = The empty set
+
+{}
+
+
+
+[Part (iii)]
+
+# $\{\emptyset\} \cup \{\{\emptyset\}\}$ = The set containing the empty set
+# and the set containing the empty set
+
+{{}, {{}}}
+
+
+
+[Part (iv)]
+
+# $\{\emptyset\} \cap \{\{\emptyset\}\}$ = The empty set
+
+{}
+
+
+[Part (v)]
+
+# $\wp(\wp(\emptyset))$ = The set containing the empty set and
+# the set containing the empty set
+
+{{}, {{}}}
+
+[Part (vi)]
+
+# $\wp(\wp(\wp(\emptyset)))$ = The set containing: (1) the empty set,
+# (2) the set containing the empty set, (3) the set containing the set
+# containing the empty set, and (4) the set that contains the empty set
+# and the set containing the empty set
+
+{ {}, {{}}, {{{}}}, {{}, {{}}} }
+
+
+
+

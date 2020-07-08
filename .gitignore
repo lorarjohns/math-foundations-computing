@@ -1,0 +1,11 @@
+*/build*
+*.gz
+*/_minted*/
+*/*/lib/
+pdf/
+*/*/.DS_Store
+*.pro*
+*.aux
+*.log
+*.out
+*.zip

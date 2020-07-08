@@ -1,0 +1,1370 @@
+% 
+% LaTeX Problem Set Template by Sachin Padmanabhan
+% I created this when I was a freshman in CS 103,
+% and I continue to use it to this day.
+%
+% Hope you enjoy!
+%
+% There may be problems with this template.
+% If so, feel free to contact me.
+%
+
+% Updated for Summer 2019 by Amy Liu
+% Updated for Summer 2020 by Ryan Smith
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathdots}
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr}
+\usepackage[margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{listings}
+\PassOptionsToPackage{usenames,dvipsnames}{color}  %% Allow color names
+\usepackage[table]{xcolor}
+\usepackage{pdfpages}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{framed}
+\usepackage{wasysym}
+\usepackage[thinlines]{easytable}
+\usepackage{hyperref}
+\usepackage{minted}
+\usemintedstyle{perldoc}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+\title{CS 103: Mathematical Foundations of Computing\\Problem Set \#1}
+\author{}
+\date{June 26, 2020}
+
+\lhead{}
+\chead{Problem Set 1}
+\rhead{June 26, 2020}
+\lfoot{}
+\cfoot{CS 103: Mathematical Foundations of Computing --- Summer 2020}
+\rfoot{\thepage}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\absfit}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\eval}[3]{\left[#1\right]_{#2}^{#3}}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\inner}[1]{\langle#1\rangle}
+\newcommand{\cond}{\bigg|}
+\newcommand{\rank}[1]{\mathbf{rank}(#1)}
+\newcommand{\range}[1]{\mathbf{range}(#1)}
+\newcommand{\nullsp}[1]{\mathbf{null}(#1)}
+\newcommand{\repr}[1]{\left\langle#1\right\rangle}
+
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{\mathbf{Tr}}
+\DeclareMathOperator{\diag}{\mathbf{diag}}
+\DeclareMathOperator{\dist}{\mathbf{dist}}
+\DeclareMathOperator{\prob}{\mathbf{prob}}
+\DeclareMathOperator{\dom}{\mathbf{dom}}
+\DeclareMathOperator{\E}{\mathbf{E}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\var}{\mathbf{var}}
+\DeclareMathOperator{\quartile}{\mathbf{quartile}}
+\DeclareMathOperator{\conv}{\mathbf{conv}}
+\DeclareMathOperator{\VC}{VC}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\Ber}{Bernoulli}
+\DeclareMathOperator{\NP}{\mathbf{NP}}
+\DeclareMathOperator{\coNP}{\mathbf{coNP}}
+\DeclareMathOperator{\TIME}{\mathsf{TIME}}
+\DeclareMathOperator{\polytime}{\mathbf{P}}
+\DeclareMathOperator{\PH}{\mathbf{PH}}
+\DeclareMathOperator{\SIZE}{\mathbf{SIZE}}
+\DeclareMathOperator{\ATIME}{\mathbf{ATIME}}
+\DeclareMathOperator{\SPACE}{\mathbf{SPACE}}
+\DeclareMathOperator{\ASPACE}{\mathbf{ASPACE}}
+\DeclareMathOperator{\NSPACE}{\mathbf{NSPACE}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\EXP}{\mathbf{EXP}}
+\DeclareMathOperator{\NEXP}{\mathbf{NEXP}}
+\DeclareMathOperator{\NTIME}{\mathbf{NTIME}}
+\DeclareMathOperator{\DTIME}{\mathbf{DTIME}}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\BPP}{\mathbf{BPP}}
+\DeclareMathOperator{\ZPP}{\mathbf{ZPP}}
+\DeclareMathOperator{\RP}{\mathbf{RP}}
+\DeclareMathOperator{\coRP}{\mathbf{coRP}}
+\DeclareMathOperator{\BPL}{\mathbf{BPL}}
+\DeclareMathOperator{\IP}{\mathbf{IP}}
+\DeclareMathOperator{\PSPACE}{\mathbf{PSPACE}}
+\DeclareMathOperator{\NPSPACE}{\mathbf{NPSPACE}}
+\DeclareMathOperator{\SAT}{\mathsf{SAT}}
+\DeclareMathOperator{\NL}{\mathbf{NL}}
+\DeclareMathOperator{\PCP}{\mathbf{PCP}}
+\DeclareMathOperator{\PP}{\mathbf{PP}}
+\DeclareMathOperator{\cost}{cost}
+\let\Pr\relax
+\DeclareMathOperator*{\Pr}{\mathbf{Pr}}
+
+% start MZ
+\let\oldemptyset\emptyset
+\renewcommand{\emptyset}{\text{\O}}
+\renewcommand{\labelitemii}{$\bullet$}
+\renewcommand\qedsymbol{$\blacksquare$}
+\newenvironment{prf}{{\bfseries Proof.}}{\qedsymbol}
+\renewcommand{\emph}[1]{\textit{\textbf{#1}}}
+\newcommand{\annotate}[1]{\textit{\textcolor{blue}{#1}}}
+\usepackage{mdframed}
+\usepackage{float}
+
+% For Polyominoes
+% Source: https://tex.stackexchange.com/a/110669
+\usepackage{color}
+
+\definecolor{lightgray}{rgb}{0.75, 0.75, 0.75}
+
+\newdimen\omsq  \omsq=16pt
+\newdimen\omrule    \omrule=1pt
+\newdimen\omint
+
+\newif\ifvth    \newif\ifhth    \newif\ifomblank
+\def\OMINO#1{%
+    \vthtrue \hthtrue
+    \vbox{ \offinterlineskip\parindent=0pt \OM#1\relax\vskip1pt}}
+\definecolor{gray}{rgb}{0.5, 0.5, 0.5}
+
+\def\OM#1{%
+    \omint=\omsq    \advance\omint-\omrule
+    \ifx\relax#1%
+    \else
+      \ifx\\#1 \newline\null \hthtrue \ifvth\vthfalse\else\vskip-\omrule\vthtrue\fi
+      \else%
+        \ifx .#1\hskip\ifhth \omrule\else \omint\fi
+        \else%
+          \ifx +#1\def\colour{black}\fi%
+          \ifx -#1\def\colour{black}\fi%
+          \ifx |#1\def\colour{black}\fi%
+          \ifx @#1\def\colour{black}\fi%
+          \ifx r#1\def\colour{red}\fi%
+          \ifx g#1\def\colour{green}\fi%
+          \ifx b#1\def\colour{blue}\fi%
+          \ifx y#1\def\colour{yellow}\fi%
+          \ifx m#1\def\colour{magenta}\fi%
+          \ifx c#1\def\colour{cyan}\fi%
+          \ifx x#1\def\colour{lightgray}\fi%
+          \textcolor{\colour}{\rule{\ifhth\omrule\else\omsq\fi}{\ifvth\omrule\else\omsq\fi}}%
+          \ifhth\else\hskip -\omrule\fi%
+        \fi%
+        \ifhth\hthfalse\else\hthtrue\fi%
+      \fi%
+    \expandafter\OM%
+    \fi}
+
+\makeatother
+% end MZ
+
+\definecolor{shadecolor}{gray}{0.95}
+
+\theoremstyle{plain}
+\newtheorem*{lem}{Lemma}
+
+\theoremstyle{plain}
+\newtheorem*{claim}{Claim}
+
+\theoremstyle{definition}
+\newtheorem*{answer}{Answer}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem*{thm}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{case}{Case}[theorem]
+
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\begin{document}
+
+\maketitle
+
+\textbf{Checkpoint Questions Due Sunday, June 28th at 11:59PM Pacific time.}
+
+\textbf{Remaining Questions Due Thursday, July 2nd at 11:59PM Pacific time.} \\
+
+Here we are -- the first problem set of the quarter! This problem set is designed to give you practice writing proofs on a variety of different topics. We hope that this problem set gives you a sense of what proof-based mathematics is like and helps solidify your understanding of set theory. \\
+
+Before you start this problem set, please do the following:
+\begin{itemize}
+	\item Sign up for Campuswire so that you have an easy way to ask us questions.
+ 	\item Review the office hours timetable to find good times to drop on by to ask questions.
+	\item Review Handout ``Proofwriting Checklist,'' for a detailed set of criteria you should apply to your proofs before submitting them. We will be running this same checklist on your proofs when grading, so please be sure to look over it before submitting!
+\end{itemize}
+The following are additional resources and handouts that can clarify or supplement your understanding of lecture topics:
+\begin{itemize}
+	\item ``Guide to $\in$ and $\subseteq$'' to make sure you understand the distinction between these terms.
+    	\item ``Guide to Set Theory Proofs,'' for more information about how to structure proofs about sets and their properties.
+    	\item ``Mathematical Vocabulary,'' which covers mathematical phrases you may need to use in your proofs and how to use them correctly.
+    	\item ``Guide to Indirect Proofs,'' which provides some guidance about how to set up proofs by contradiction and contrapositive.
+    	\item ``Ten Techniques to Get Unstuck,'' for advice about how to make progress on these sorts of problems when you're not sure what to do.
+\end{itemize}
+As always, please feel free to drop by office hours or post on Campuswire if you have any questions. We're happy to help out. \\
+
+Good luck, and have fun! \pagebreak
+
+Write your solutions to the following checkpoint problems and submit them through GradeScope by Sunday at 11:59PM Pacific time. Note in particular that late days may NOT be used on checkpoints. These problems will be graded on a 0 / \checkmark / $\checkmark^+$ scale. Solutions that reasonably attempt to solve all of the problems, even if the attempts are incorrect, will receive a $\checkmark^+$. Solutions that reasonably attempt some but not all of the problems will receive a \checkmark. Solutions that do not reasonably attempt any of the problems -- or solutions that are submitted after the deadline -- will receive a 0. Essentially, if you've made a good, honest effort to solve all of the problems and you submit on time, you should receive full credit even if your solutions contain errors. \\
+
+Please make the best effort you can when solving these problems. We want the feedback we give you to be as useful as possible, so the more time and effort you put into them, the better we'll be able to comment on your proof style and technique. We will try to get these problems returned to you with feedback on your proof style by Wednesday. Submission instructions are in the ``Problem Set Policies'' handout.
+
+\section*{Checkpoint Problem One: Finding Negations}
+
+In order to write a proof by contradiction or contrapositive, you'll need to determine the negation of one or more statements. In Friday's lecture, we talked about a few common classes of statements and how to form their negations. Using what you've learned, answer the following multiple-choice questions and \textit{\textbf{briefly explain how you arrived at your answer}}. \\
+
+Which of the following is the negation of ``everything that has a beginning has an end?''
+
+\begin{enumerate}[label=\Alph*)]
+    \item Everything that does not have a beginning has an end.
+    \item Everything that has a beginning has no end.
+    \item There is something that has no beginning and has an end.
+    \item There is something that has a beginning and has no end.
+\end{enumerate}
+
+\begin{shaded}
+\emph{D.) There is something that has a beginning and has no end.} \\
+We can restate the original statement as a statement of the form
+\begin{equation}
+\forall x, P(x),
+\end{equation} 
+where $x$ represents ``things that have a beginning'' and $P(x)$ represents the statement ``$x$ has an end''. \\
+The negation of a universal statement is always an existential statement, so only C and D are viable answers. \\
+To negate the original statement, we must show that \begin{equation}
+\exists x. \neg P(x).
+\end{equation} \\
+The only one of the two remaining answers that fits the required form of the negation is D.
+
+\end{shaded}
+
+Which of the following is the negation of ``there is a successful person who is grateful?''
+
+\begin{enumerate}[label=\Alph*)]
+    \item There is an unsuccessful person who is grateful.
+    \item There is a successful person who is ungrateful.
+    \item Every successful person is grateful.
+    \item Every successful person is ungrateful.
+    \item Every unsuccessful person is grateful.
+    \item Every unsuccessful person is ungrateful.
+\end{enumerate}
+
+\begin{shaded}
+\emph{D.) Every successful person is ungrateful.} \\
+
+This statement is an existential statement, which we can think of as having the form 
+\begin{equation} \label{eq:3}
+\exists x. P(x),
+\end{equation}
+where $x$ represents ``a successful person'' and $P(x)$ represents the proposition ``$x$  is grateful''. \\
+The negation of an existential statement is always a universal statement, so we can discard answers A and B. \\
+To negate (\ref{eq:3}), we must find a statement that takes the form
+\begin{equation}
+\forall x, \neg P(x).
+\end{equation}
+The statement that matches is D.
+\end{shaded}
+
+Which of the following is the negation of ``if $A \subseteq B$, then $A - B = \emptyset$?''
+
+\begin{enumerate}[label=\Alph*)]
+    \item If $A \subseteq B$, then $A - B = \emptyset$.
+    \item If $A \subseteq B$, then $A - B \neq \emptyset$.
+    \item If $A \not\subseteq B$, then $A - B = \emptyset$.
+    \item If $A \not\subseteq B$, then $A - B \neq \emptyset$.
+    \item There are sets $A$ and $B$ where $A \subseteq B$ and $A - B = \emptyset$.
+    \item There are sets $A$ and $B$ where $A \subseteq B$ and $A - B \neq \emptyset$.
+    \item There are sets $A$ and $B$ where $A \not\subseteq B$ and $A - B = \emptyset$.
+    \item There are sets $A$ and $B$ where $A \not\subseteq B$ and $A - B \neq \emptyset$.
+\end{enumerate}
+
+\begin{shaded}
+\emph{F.) There are sets $A$ and $B$ where $A \subseteq B$ and $A - B \neq \emptyset$.} \\
+
+This is an implication of the form 
+\begin{equation} \label{eq:5}
+P \rightarrow Q,
+\end{equation}
+where $P$ corresponds to $A \subseteq B$ and $Q$ corresponds to $A - B = \emptyset$.
+When no explicit quantifiers are used, we assume the universal. \\
+To negate an implication, we must find a statement where the antecedent is true and the consequent is false. Transforming (\ref{eq:5}), we can write the negation as
+\begin{equation}
+P \land \neg Q.
+\end{equation}
+The negation of a universal statement is an existential one, so only answers E-G are viable candidates. Of these, only F matches the correct logical structure.
+\end{shaded}
+
+\textit{\textcolor{blue}{Remember that you need to provide a justification for your answers. While it's not required, ideally you should be able to explain both why your answer is correct \textbf{and} why all the other answers are incorrect.}}
+
+\pagebreak
+
+\section*{Checkpoint Problem Two: Set Theory Warmup}
+
+This question is designed to help you get used to the notation and mathematical
+conventions surrounding sets.
+Consider the following sets:
+\begin{align*}
+A &= \{0, 1, 2, 3, 4\} \\
+B &= \{2, 2, 2, 1, 4, 0, 3\} \\
+C &= \{1, \{2\}, \{\{3, 4\}\}\} \\
+D &= \{1, 3\} \\
+E &= \N \\
+F &= \{\N\}
+\end{align*}
+Answer each of the following questions and briefly justify your answers.
+No proofs are necessary.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Which pairs of the above sets, if any, are equal to one another?
+
+\begin{shaded}
+A set is an \textit{unordered} collection of \textit{unique} elements. So, deduplicating the elements in $B$, we see that 
+\begin{equation}
+  \begin{aligned}
+	B & = \{2, 2, 2, 1, 4, 0, 3\} \\
+  	  & = \{0, 1, 2, 3, 4\}.
+  \end{aligned}
+\end{equation}
+Therefore, we know that $A = B$, because they contain precisely the same elements as one another. 
+\end{shaded}
+
+\item Is $D \in A$? Is $D \subseteq A$?
+
+\begin{shaded}
+Something is an element of a set iff the elements of that set contain an object that is precisely equal to it. Therefore, we know that $D \notin A$, because none of the elements of $A$ correspond exactly to $\{1, 3\}$. \\
+
+A set $S$ is a subset of another set $T$ iff all of the elements in $S$ are elements in $T$. Thus we can see that $D \subseteq A$, because every element of $D$ also appears in $A$.
+\end{shaded}
+
+\item What is $A \cap C$? How about $A \cup C$? How about $A \Delta C$?
+
+\begin{shaded}
+The intersection of $A$ and $C$ is all of the elements that appear in both $A$ and $C$. The only element that these two sets have in common is the number $1$, as demonstrated:
+\begin{equation} \label{eq:8}
+	\begin{aligned}
+		A \cap C & = \{1\}.
+	\end{aligned}
+\end{equation}
+The union of $A$ and $C$ is the set \begin{equation}
+\{x: x \in A \lor x \in C\}.
+\end{equation}
+Combining $A$ and $C$ we can see that
+\begin{equation}
+A \cup B = \{0, 1, 2, 3, 4, \{2\}, \{\{3, 4\}\}\}.
+\end{equation}
+
+The symmetric difference $A \Delta C$ is the set of elements that are in either of the sets but not in their intersection. That is, $A \Delta C$ is equal to the union of both sets' relative complements:
+\begin{equation}
+A \Delta C = (A - C) \cup (C - A)
+\end{equation}
+
+or, equivalently stated using exclusive-or, the set
+\begin{equation}
+\{x: x \in A \oplus x \in C\}.
+\end{equation}
+Therefore, using our knowledge of the intersection $A \cap C$ in (\ref{eq:8}), we can see that
+\begin{equation}
+A \Delta C = \{0, 2, 3, 4, \{2\}, \{
+\{3, 4\}\}\}.
+\end{equation}
+\end{shaded}
+
+\item What is $A - C$? How about $\{A - C\}$? Are those sets equal?
+
+\begin{shaded}
+The relative complement $A - C$ is the set of elements in $A$ but not in $B$. So,
+\begin{equation}
+A - C = \{0, 2, 3, 4\}.
+\end{equation}
+
+The set $\{A - C\}$ is the set containing the set of elements in $A$ but not in $C$. So,
+\begin{equation}
+\{A - C\} = \{\{0, 2, 3, 4\}\}.
+\end{equation}
+These two sets are not equal. One of them has four elements --- namely, the integers $0, 2, 3, 4$ --- and the other has one element --- the set $\{0, 2, 3, 4\}$.
+\end{shaded}
+
+\item What is $|B|$? What is $|E|$? What is $|F|$?
+
+\begin{shaded}
+The cardinality of a set $S$ is denoted $|S|$ and represents the number of elements that it contains. So,
+\begin{align}
+|B| & = 5, \\
+|E| & = \aleph_0, \\
+|F| & = 1.
+\end{align}
+Even though the lone element of $F$ is an infinite set, $F$ itself still contains only one element.
+\end{shaded}
+
+\item What is $E - A$? Express your answer in set-builder notation.
+
+\begin{shaded}
+We can express the set of natural numbers except for 0, 1, 2, 3, and 4 as:
+\begin{equation}
+	\begin{aligned}
+		E - A & = \{x \in \mathbb{N}: x \notin A\} \\
+		& = \{x \in \mathbb{N}: x > 4 \}.
+	\end{aligned}
+\end{equation}
+\end{shaded}
+
+\item Is $0 \in E$? Is $0 \in F$?
+
+\begin{shaded}
+We know that $0 \in E$ because
+\begin{equation}
+	\begin{aligned}
+	E & = \mathbb{N} \\
+	& = \{0, 1, 2, 3, 4, 5, \ldots \}.
+	\end{aligned}
+\end{equation}
+But $0 \notin F$, because $F$ has only one element, namely $\mathbb{N}$, and $0 \neq \mathbb{N}$.
+\end{shaded}
+
+\end{enumerate}
+
+\section*{Checkpoint Problem Three: Modular Arithmetic}
+
+Different numbers can yield the same remainder when divided by some number. For example, the numbers 1, 12, 23, and 34 all leave a remainder of one when divided by eleven. To formalize this relationship between numbers, we'll introduce a relation $\equiv_k$ that, intuitively, indicates that two numbers leave the same remainder when divided by $k$. For example, we'd say that $1 \equiv_{11} 12$, since both 1 and 12 leave a remainder of 1 when divided by 11, and that $8 \equiv_3 14$, since both 8 and 14 leave a remainder of 2 when
+divided by 3. 
+
+To be more rigorous, we'll formally define $\equiv_k$. For any integer $k$, define $a \equiv_k b$ as follows:
+\begin{center}
+    We say that $a \equiv_k b$ if there exists an integer $q$ such that $a = b + kq$
+\end{center}
+
+We'd read the statement ``$x \equiv_k y$'' aloud as ``\textit{$x$ is congruent to $y$ modulo $k$}.'' For example, $7 \equiv_3 4$, because $7 = 4 + 3 \cdot 1$, and $5 \equiv_4 13$ because $5 = 13 + 4 \cdot (-2)$. 
+In this problem, you will prove several properties of modular congruence.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Prove that for any integer $x$ and any integer $k$ that $x \equiv_k x$.
+
+\textit{\textcolor{blue}{Be careful not to assume what you need to prove. Don't start your proof by assuming there's a choice of $q$ where $x = x + kq$ and then solving for $q$. If you assume there's an integer $q$ where $x = x + kq$, you're already assuming that $x \equiv_k x$! Look at the proofs we did in lecture with odd and even numbers as an example of how to prove that there is a number with a specific property without making any unfounded assumptions.}}
+
+\begin{shaded}
+
+\begin{theorem}
+	For any integer $x$ and any integer $k \neq 0$, $x \equiv_k x$.
+\end{theorem}	
+\begin{proof}
+	Choose any arbitrary integers $x$ and $k$. We need to show that there exists a $q$ such that
+	\begin{equation} \label{eq:21}
+	x = x + kq.
+	\end{equation}
+
+	It is always true that
+	\begin{equation}
+	x = x + 0k.
+	\end{equation}
+	
+	Therefore, there exists a $q$ (namely, $q=0$) such that $x = x + kq$, as required.
+\end{proof}
+This is a valid constructive proof, but here's the equivalent as a reductio:
+\begin{proof}
+	Assume for the sake of contradiction that $x \not\equiv_k x$. \\
+	Then it must be the case that 
+	\begin{equation} x \neq x + kq. 
+	\end{equation}.
+	However, when $q = 0$, we see that
+	\begin{equation}
+	\begin{aligned}
+		x & \neq x + 0k & \implies \\
+		x & \neq x,
+	\end{aligned}
+	\end{equation}
+	a logical impossibility.
+	
+	Since we have achieved an absurdity, it must be the case that $x \equiv_k x$, since there exists a $q$ (namely, $q = 0$) such that $x = x + kq$.
+\end{proof}
+\end{shaded}
+
+\item Prove that for any integers $x$ and $y$ and any integer $k$ that if $x \equiv_k y$, then $y \equiv_k x$.
+
+\textit{\textcolor{blue}{Keep an eye out for your variable scoping in the above proof. Make sure you introduce the variables $x$, $y$, and $k$ before you use them. Are they chosen arbitrarily? Do they represent specific values?}}
+
+\begin{shaded}
+\begin{theorem}
+	Given any integers $x$, $y$, and $q$, if $x \equiv_k y$, then $y \equiv_k x$.
+\end{theorem}
+\begin{proof}
+	Choose any arbitrary integers $x$, $y$, and $k$. Suppose that $x \equiv_k y$. We need to show that $y \equiv_k x$. \\
+
+	Since $x \equiv_k y$, we know that there exists some integer $q$ such that
+	\begin{equation}
+	x = y + kq.
+	\end{equation}
+
+	For $y \equiv_k x$ to be true, there must exist some integer $r$ such that
+
+	\begin{equation} \label{eq:24}
+	y = x + kr.
+	\end{equation}
+	
+	When $r = -q$, it is always true that (\ref{eq:24}) is true. Therefore there exists some $r$ (namely, $-q$) that makes $y \equiv_k$ x true, as required.
+\end{proof}
+\end{shaded}
+
+\item Prove that for any integers $x$, $y$, and $z$ and any integer $k$ that if $x \equiv_k y$ and $y \equiv_k z$, then $x \equiv_k z$.
+
+\begin{shaded}
+\begin{theorem}
+	For any integers $x$, $y$, and $z$ and any integer $k$ that if $x \equiv_k y$ and $y \equiv_k z$, then $x \equiv_k z$.
+\end{theorem}
+\begin{proof}
+	Let $x$, $y$, $z$, and $k$ be any arbitrary integers. Suppose that $x \equiv_k y$ and $y \equiv_k z$. We will show that $x \equiv_k z$. \\
+	Since  $x \equiv_k y$, we know that there exists some integer $q$ such that 
+	\begin{equation} \label{eq:25}
+	x = y + kq.
+	\end{equation}
+	
+	Similarly, since $y \equiv_k z$, we know that there exists some integer $r$ such that
+	\begin{equation} \label{eq:26}
+	y = z + kr.
+	\end{equation}
+	
+	For $x \equiv_k z$ to be true, there must be some integer $p$ such that
+	\begin{equation}
+	x = z + kp.
+	\end{equation}
+	
+	Plugging (\ref{eq:26}) into (\ref{eq:25}), we can see that
+	\begin{equation}
+	\begin{aligned}
+		x & = z + kr + kq & \implies \\
+		x & = z + k(r + q).
+	\end{aligned}
+	\end{equation}
+	
+	So, there exists an integer $p$ (namely, $r + q$) such that $x \equiv_k z$, as required.
+	
+\end{proof}
+\textit{\textcolor{cyan}{NB: These three proofs together establish that modular congruence is reflexive, symmetric, and transitive. Therefore, modular congruence is an equivalence relation.}}
+\end{shaded}
+
+\end{enumerate}
+
+Modular congruence is a powerful mathematical tool. You'll use it later in this problem set to build a better
+understanding of star-drawing!
+
+\pagebreak
+
+\begin{center}
+\textit{\textbf{The rest of these problems are due on Friday at 3:00PM. \\ Please type your solutions and submit them on GradeScope.}}
+\end{center}
+
+\section{Much Ado About Nothing}
+
+It can take a bit of practice to get used to the empty set. This problem will ask you to think about a few different sets related to $\varnothing$. \\
+
+Go to the CS103 website and download the starter files for Problem Set One. Unpack the files somewhere convenient and open up the bundled project. Answer each part of this question by editing the relevant resource files (they're in the \texttt{res/} directory). There's information in the top of each of the files about how to represent sets; most importantly, note that to write out the empty set, you should write \{\} rather than using the empty-set symbol. For example, the set $\{\varnothing\}$ would be written as \{\{\}\}.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+	\item Edit the file \texttt{PartI.object} so that it contains a set equal to $\varnothing \cup \{\varnothing\}$.
+    	\item Edit the file  \texttt{PartII.object} so that it contains a set equal to $\varnothing \cap \{\varnothing\}$.
+    	\item Edit the file  \texttt{PartIII.object} so that it contains a set equal to $\{\varnothing\} \cup \{\{\varnothing\}\}$.
+    	\item Edit the file  \texttt{PartIV.object} so that it contains a set equal to $\{\varnothing\} \cap \{\{\varnothing\}\}$.
+    	\item Edit the file  \texttt{PartV.object} so that it contains a set equal to $\wp(\wp(\varnothing))$.
+    	\item Edit the file  \texttt{PartVI.object} so that it contains a set equal to $\wp(\wp(\wp(\varnothing)))$.
+\end{enumerate}
+
+The starter code contains a driver program you can use to see the contents of your files and confirm they're syntactically correct. Submit your answers through GradeScope under ``Coding Problems for Problem Set One'' by uploading your edited starter files. You're welcome to submit as many times as you'd like.
+
+\begin{shaded}
+Submit your six $\mathsf{.object}$ files through GradeScope under ``Coding Problems for Problem Set One'' by uploading your edited starter files. 
+\end{shaded}
+
+\pagebreak
+
+\section{Set Theory in C++}
+
+The C++ standard library contains a type called \mintinline{c++}{std::set} that represents a set of elements, all of which must be of the same type. For example, the type \mintinline{c++}{std::set<int>} represents a set of integers, the type \mintinline{c++}{std::set<std::string>} represents a set of strings, and \mintinline{c++}{std::set<std::set<int>>} is a type representing a set of sets of integers. \\
+
+There are all sorts of operations you can perform on \mintinline{c++}{std::sets}. For example, here's how you iterate over all the elements of a set:
+
+\begin{minted}{c++}
+	std::set<T> mySet;
+	for (T elem: mySet) {
+	    /* ... do something with the current element elem ... */
+	}
+\end{minted}
+
+Here's how you check whether a particular value is an element of a set:
+
+\begin{minted}[escapeinside=||,mathescape=true]{c++}
+	if (mySet.count(value)) {
+	    /* ... value $\in$ mySet ... */
+	} else {
+	    /* ... value $\notin$ mySet ... */
+	}
+\end{minted}
+
+And, finally, here's how you can get the cardinality of a set:
+
+\begin{minted}{c++}
+	size_t size = mySet.size();
+\end{minted}
+
+Here, the \mintinline{c++}{size_t} type is a type representing a natural number, since sets can't have negative size. (The folks who designed the C++ standard libraries had a strong discrete math background.) \\
+
+One of the major differences between the sets we've talked about in CS103 and the \mintinline{c++}{std::set type} is that in discrete mathematics, sets can contain anything -- numbers, philosophies, recipes, other sets, etc. -- but in C++ all objects in a set must have the same type. For the purposes of this problem, we've created a custom C++ type called \mintinline{c++}{Object}. Variables of type \mintinline{c++}{Object} can represent just about anything, so a \mintinline{c++}{std::set<Object>} represents something pretty similar to the sets we've been studying so far. \\
+
+Some \mintinline{c++}{Objects} are actually just \mintinline{c++}{std::sets} in disguise. If you have an \mintinline{c++}{Object}, you can test whether it's actually a set by using this provided helper function:
+
+\begin{minted}{c++}
+				     bool isSet(Object o);
+\end{minted}
+
+This takes in an \mintinline{c++}{Object}, then returns true if that \mintinline{c++}{Object} is actually a set and false otherwise. If you have an \mintinline{c++}{Object} that really is a set, you can convert it to a set by using this helper function:
+
+\begin{minted}{c++}
+				std::set<Object> asSet(Object o);
+\end{minted}
+
+This function takes in an \mintinline{c++}{Object} that you know happens to be a set, then returns the \mintinline{c++}{std::set<Object>} that it actually is. \\
+
+For example, suppose you have an \mintinline{c++}{Object} that you know is really the set $\{1, 2, 3, 4\}$. You could iterate over it using this code:
+
+\begin{minted}{c++}
+	Object reallyASet = /* ... */;
+	for (Object x: asSet(reallyASet)) {
+	    /* ... do something with x ... */
+	}
+\end{minted}
+
+In this problem, we'd like you to demonstrate your understanding of sets and set theory by coding up a number of functions in C++ that operate on sets. In doing so, we hope that you'll solidify your grasp of the distinctions between related concepts in set theory, such as the $\in$ and $\subseteq$ relations and power sets. \\
+
+Open the file \texttt{SetTheory.cpp} from the starter files. There, you'll find a bunch of stubs of functions that you'll need to implement. The provided starter code contains a test harness you can use to try out your functions. You won't need to modify any of the other C++ files bundled with the starter code. \\
+
+As with Problem One, you'll submit the code that you write through GradeScope separately from the rest of the problems on this problem set. The GradeScope autograder will get back to you with feedback about how you're doing on this problem, and you're welcome to submit as many times as you'd like.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Implement a function
+\begin{minted}{c++}
+       bool isElementOf(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S \in T$. 
+
+\textit{\textcolor{blue}{S and T might not be sets; you'll need to use the isSet and asSet functions appropriately.}}
+
+\item Implement a function
+\begin{minted}{c++}
+       bool isSubsetOf(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S \subseteq T$.
+
+\textit{\textcolor{blue}{S and T might not be sets; use the isSet predicate to check whether the appropriate arguments are sets and asSet to get a view of them as sets.}}
+
+\item Implement a function
+\begin{minted}{c++}
+       bool areDisjointSets(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S$ and $T$ are sets where $S \cap T = \varnothing$. (Two sets with this property are called \textbf{\textit{disjoint}}.) The input parameters $S$ and $T$ may or may not be sets, and if they aren't, your function should return false.
+
+\item Implement a function
+\begin{minted}{c++}
+       bool isSingletonOf(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S = \{T\}$. Again, $S$ and $T$ may or may not be sets.
+
+\item Implement a function
+\begin{minted}{c++}
+       bool isElementOfPowerSet(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S$ and $T$ are sets and $S \in \wp(T)$. Again, $S$ and $T$ may or may not be sets.
+
+\textit{\textcolor{blue}{As a hint, you shouldn't need to write code that computes $\wp(T)$ explicitly. See if you can find a different way to do this.}}
+
+\item Implement a function
+\begin{minted}{c++}
+       bool isSubsetOfPowerSet(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S$ and $T$ are sets and $S \subseteq \wp(T)$. Again, $S$ and $T$ may or may not be sets.
+
+\item Implement a function
+\begin{minted}{c++}
+       bool isSubsetOfDoublePowerSet(Object S, Object T);
+\end{minted}
+that takes as input two \mintinline{c++}{Objects} $S$ and $T$, then returns whether $S$ and $T$ are sets and $S \subseteq \wp(\wp(T))$. Again, $S$ and $T$ may or may not be sets.
+
+\end{enumerate}
+
+To submit your work, upload your edited starter files to GradeScope. You'll get immediate feedback on your score from our autograder, and you're allowed to resubmit as many times as you'd like.
+
+\begin{shaded}
+Submit your edited $\mathsf{SetTheory.cpp}$ file through GradeScope under ``Coding Problems for Problem Set One''.
+\end{shaded}
+
+\pagebreak
+
+\section{Describing the World in Set Theory}
+
+The notation of set theory (e.g. $\cup, \cap, \wp, \subseteq, \in$, etc.) is a great tool for describing the real world. Answer
+each of the following questions by writing an expression using set theory notation, but \textit{\textbf{without}} using
+plain English, \textit{\textbf{without}} using set-builder notation, \textit{\textbf{without}} introducing any new variables, and \textit{\textbf{without}} using propositional or first-order logic (which we'll cover next week).
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Let's have $C$ be the set of US citizens, $S$ the set of people who live in a US state, $M$ be the set of
+all people eighteen and older, and $V$ be the set of people who are allowed to vote in US presidential
+elections. Write an expression that says that every US citizen age eighteen and older who
+lives in a US state can vote in a US presidential election.
+
+\textit{\textcolor{blue}{Once you've written up your answer to this problem, take a minute to \textbf{type-check} it. As an example, suppose
+that you have the following answer: 
+\begin{equation*}
+(C \in M) \cap (V \in M)
+\end{equation*}
+This expression can't possibly be right, and here's one way to see this. The expression $C \in M$ is of type
+boolean -- either $C \in M$ is true or it isn't -- and the same is true of $V \in M$. However, the intersection operator
+$\cap$ can only be applied to sets. The expression therefore contains a type error: it tries to apply an operator that only works on sets to boolean values. }}
+
+\begin{shaded}
+\begin{equation*}
+	[(C \cap M) \cap S] \subseteq V
+\end{equation*}
+\end{shaded}
+
+\item Suppose you're on an exciting first date. Let $Y$ represent your hobbies and $D$ represent your
+date's hobbies. Write an expression that says that you have a hobby that your date doesn't have.
+
+\textit{\textcolor{blue}{You can type-check this answer in a different way. For example, suppose you came up with this expression:
+\begin{equation*}
+Y \cup D
+\end{equation*}
+Here, $Y$ and $D$ are sets, so it's perfectly fine to write $Y \cup D$, which evaluates to an object of type set. But
+notice that the statement here asks you to write an expression that says ``you have a hobby that your date
+doesn't have,'' and that statement is essentially of type boolean (you either do or do not have a hobby your
+date doesn't have). Therefore. $Y \cup D$ can't possibly be an expression with the right meaning, since the type
+of the expression (set) doesn't match the type of the statement (boolean). }}
+
+\begin{shaded}
+\begin{equation*}
+	Y \notin D
+\end{equation*}
+\end{shaded}
+
+\item The song ``I am Moana'' from the movie \textit{Moana} starts off with the following lyrics: 
+\begin{center}
+    ``I know a girl from an island / She stands apart from the crowd.''
+\end{center}
+Let $K$ be the set of all people I know, $G$ be the set of all girls, $I$ be the set of all people from an island, and $C$ be the set of all people who stand apart from the crowd. Write an expression that expresses the above lyric using the notation of set theory. 
+
+\begin{shaded}
+\begin{equation*}
+	G \in (C \cap (K \cap I))
+\end{equation*}
+\end{shaded}
+
+\item Let's say that a \textit{\textbf{committee}} is a group of people, which we can think of as being represented by the set of people that comprise it. Let's have $S$ represent the set of all students at Stanford and let $F$ represent the set of all faculty at Stanford. Write an expression representing the set of all committees you can make from Stanford students and faculty that contain at least one student and at least one faculty member. You can assume no one is both a student and a faculty member.
+
+\textit{\textcolor{blue}{Something to think about: how would you say ``all committees made purely of students?'' }}
+
+\begin{shaded}
+\begin{equation*}
+	\wp(S \cup F)
+\end{equation*}
+\textit{NB: I've not accounted for the empty set, or sets of single people, which would be valid subsets of the power set of the union of the sets of students and faculty. One way to try to get around this is to explicitly exclude the empty set, but that still leaves single-member committees:}
+
+\begin{equation*}
+\wp(S \cup F)\setminus \{\emptyset\}
+\end{equation*}
+
+\textit{Another ``cheat'' might be to take the power set of ordered pairs of students and faculty, but that is overly restrictive, because equal numbers of students and faculty on a committee is not specifically required.}
+
+\begin{equation*}
+\wp(S \times F)
+\end{equation*}
+\end{shaded}
+
+\end{enumerate}
+
+\pagebreak
+
+\section{Proof Critiques}
+
+One of the best ways to improve your proof \textit{writing} is to do some proof \textit{reading}. In doing so, you'll get a much better perspective on why certain stylistic conventions matter, both in the positive sense, (``wow, that's so easy to read!'') and in the negative sense (``I can't make heads or tails of this!''). You'll also get practice tracing through mathematical arguments, which will help expand your repertoire of techniques and give you a better sense of what details to focus on in your own reasoning. 
+
+We've curated three proofs for you to review. Read these proofs, and for each one, do the following: 
+\begin{itemize}
+    \item \textit{\textbf{Critique its style.}} Our Proofwriting Checklist contains specific details to review in any proof. Go through the checklist one item at a time, identifying any style errors and explaining each. 
+    \item \textit{\textbf{Critique its reasoning.}} Are the arguments given by these proofs correct? If there are logic errors, point them out and demonstrate why they're incorrect. Then, determine whether the theorem being proved is even true in the first place. After all, you can prove anything using faulty logic!
+    \item \textit{\textbf{If possible, rewrite the proof.}} You now have a list of issues. Based on what you've found, do one of the following:
+    \begin{itemize}
+        \item If the reasoning is correct but the proof has poor style, simply rewrite the proof to improve its style, keeping the core argument intact.
+        \item If the reasoning is \textit{incorrect} but the statement being proved is still true, write a new proof of the overall theorem. Try to modify the original argument as little as possible.
+        \item If the reasoning is \textit{incorrect} and the statement being proved isn't even true to begin with, briefly explain why the statement isn't true, though no formal disproof is required.
+    \end{itemize}
+\end{itemize}
+
+You should submit both your notes from the initial critique and your newly-revised proofs.
+
+\pagebreak
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+    \item Critique this proof about parities (the \textit{\textbf{parity}} of a number is whether it's even or odd.)
+    \begin{thm}
+     The sum of an even integer and an odd integer is odd.
+    \end{thm}
+    \begin{prf}
+    This proof will talk about adding together different kinds of numbers. An even integer is an integer that can be written as $2k$ for some integer $k$. Therefore, $m = 2k$. Similarly, an odd integer is one that can be written as $2k+1$ for some integer $k$. So $n = 2k+1$. $m + n = 2k + 2k + 1 = 4k + 1$. Therefore $m + n$ is odd.
+    \end{prf}
+    
+    \begin{shaded}
+    \textit{Variable declaration.} This proof fails to prove the conclusion, because it does not say what $m$ and $n$ represent. Since we don't know whether $m$ and $n$ have any logical connection to even and odd integers, the proof is incomplete. \\
+    
+    \textit{Variable scope.} This proof assumes that the scope of $k$ ranges over both the definition of even integers and the definition of odd integers. However, in context, the two integers in question need not be equal, and should have their own distinct symbols in each definition. \\
+    
+    \textit{Writing and formatting.} The algebraic manipulations of the definitions are all on one line, and the proof does not provide any explanation of the reasoning for each transformation. Better formatting would make the proof easier to read, and adequate explanation would make the proof's reasoning more apparent.
+    
+    \begin{proof}[Revised proof.]
+    	Let $m$ be an arbitrary even integer, and let $n$ be an arbitrary odd integer. We will show that the sum $m + n$ is odd. \\
+    	Since $m$ is even, we know that it can be expressed as
+    	\begin{equation}
+    	m = 2k
+    	\end{equation}
+    	for some integer $k$.
+    	
+    	Since $n$ is odd, we know that it can be expressed as
+    	\begin{equation}
+    	n = 2r + 1
+    	\end{equation}
+    	for some integer $r$.
+    	
+    	Plugging in these expressions for $m$ and $n$, we learn that
+    	\begin{equation}
+    	\begin{aligned}
+    	m + n &= 2k + 2r + 1 \\
+    	&= 2(k + r) + 1.
+    	\end{aligned}
+    	\end{equation}
+    	
+    	So $m + n = 2s + 1$ for some integer $s$ (namely, $k + r$). Therefore, we have shown that $m + n$ is odd, as required.
+    \end{proof}
+    \end{shaded}
+
+    \item Critique this proof about natural numbers.
+    \begin{thm}
+    Every natural number is odd.
+    \end{thm}
+    \begin{prf}
+    Assume for the sake of contradiction that every natural number is even. In particular, that would mean that 137 is even. Since $137 = 2 \cdot 68 + 1$ and 68 is a natural number, we see that 137 is odd. We know that there is no integer $n$ where $n$ is both odd and even. However, $n = 137$ is both even and odd. This is impossible. We've reached a contradiction, so our assumption must have been wrong. Therefore, every natural number is odd.
+    \end{prf}
+    
+    \begin{shaded}
+    \textit{\textcolor{cyan}{This theorem is false.}}
+    
+    \textit{(Il)logical reasoning.} In a proof by contradiction, we assume the negation of the thing to be proved. But in this case, the negation of the universal statement ``Every natural number is odd'' is the existential statement ``At least one natural number is even''---not ``Every natural number is even'', as the proof presumes. From this mistake, the subsequent line of reasoning reaches an invalid conclusion.
+    
+    \textit{Applying definitions.} The proof could be clearer about the way that it attempts to apply the definition of an odd integer. As it stands, information is introduced somewhat out-of-order, which contributes to another issue: the scope of the definition. The proof is about natural numbers, but the definition applies to integers. The audience knows that $\mathbb{N} \subseteq \mathbb{Z}$, but it would still be better to clarify the argument that $137$ is an odd natural number.
+    \end{shaded}
+
+    \item Critique this proof about modular arithmetic. 
+    \begin{thm}
+     If $n$ is an integer and $n \equiv_2 0$, then $n \equiv_4 0$.
+    \end{thm}
+    \begin{prf}
+    We will prove the contrapositive of this statement and show that if $n$ is an integer where $n \equiv_4 0$, then $n \equiv_2 0$. Since $n \equiv_4 0$, we know $n = 0 + 4q$. This in turn tells us that $n = 2(2q)$, so there is an integer $m$ such that $n = 2m$. Consequently, we see that $n = 0 + 2m$, and so $n \equiv_2 0$, as required.
+    \end{prf}
+
+    \begin{shaded}
+    \textit{\textcolor{cyan}{This theorem is false.}}
+    
+    \textit{(Il)logical reasoning.} This proof sets out to prove the contrapositive of the theorem, but what it actually proves is the logical converse, which has a different truth table---Indeed, it is a true proposition.
+    
+    \textit{Variable declaration.} The proof also forgets to explicitly add $n$ to the assumptions that it is making.
+    
+    \textit{Applying definitions.} In the application of the definition of $\equiv_k$, the proof does not say what $q$ stands for.
+    
+    \begin{theorem}[Logical converse]
+	If $n$ is an integer and $n \equiv_4 0$, then $n \equiv_2 0$.
+    \end{theorem}
+    \begin{proof}[Proof of logical converse.]
+    	Choose any integer $n$ such that $n \equiv_4 0$. Since $n \equiv_4 0$, we know that
+    	\begin{equation}
+    	n = 0 + 4q
+    	\end{equation}
+    	for some integer $q$.
+    	
+    	Factoring the right side of this equality, we see that
+    	\begin{equation}
+    	n = 0 + 2(2q).
+    	\end{equation}
+    	
+    	So there exists some integer $r$ (namely, $2q$) such that $n = 0 + 2r$. Therefore, $n \equiv_2 0$, as required.
+    \end{proof}
+    \end{shaded}
+
+\end{enumerate}
+
+\pagebreak
+
+\section{Modular Arithmetic, Part II}
+
+The modular congruence relation you saw in the checkpoint problem has a lot of nice properties. As you saw, in many ways, it acts like regular old equality. How far does that connection extend?
+
+Below are two statements. For each true statement, write a proof that the statement is true. For each false statement, write a disproof of the statement (take a look at the Proofwriting Checklist for information about how to write a disproof.) You can use any proof techniques you'd like. 
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Prove or disprove: for any integers $x, y, z$, and $k$, if $x \equiv_k y$ then $xz \equiv_k yz$.
+
+\textit{\textcolor{blue}{This is your first example of a ``prove or disprove'' problem. Your first task is to figure out whether it's true or false, since if it's true you'll want to prove it and if it's false you'll want to disprove it.}}
+
+\textit{\textcolor{blue}{Here are two strategies for approaching problems like these. First, try out a lot of examples! You'll want to get a feel for what the symbolic expression above ``feels'' like in practice. Second, get a sheet of scratch paper and write out both the statement and its negation. One of those statements is true, and your task is to figure out which one it is. Once you have those two statements, think about what you would need to do to prove each of them. In each case, what would you be assuming? What would you need to prove? If you can answer those questions, you can explore both options and seeing which one ends up panning out.}}
+
+\textit{\textcolor{blue}{Finally, remember to call back to definitions! Regardless of whether you're proving or disproving this, you'll want to refer to the formal definition of modular congruence from the checkpoint problem.}}
+
+\begin{shaded}
+\begin{proof}
+	Let $x$, $y$, $z$, and $k$ be arbitrary integers such that $x \equiv_k y$. We will prove that $xz \equiv_k yz$.
+	
+	Since $x \equiv_k y$, we know that
+	\begin{equation}
+	x = y + kq
+	\end{equation}
+	for some integer $q$.
+	
+	Multiplying this equality by $z$, we learn that
+	\begin{equation}
+	xz = yz + kqz.
+	\end{equation}
+	
+	So, there exists an integer $r$ (namely, $qz$) such that $xz = yz + kr$.
+	
+	Therefore, we have shown that $xz \equiv_k yz$, as required.
+\end{proof}
+\end{shaded}
+
+\item Prove or disprove: for any integers $x, y, z$ and $k$, if $z \neq 0$ and $xz \equiv_k yz$, then $x \equiv_k y$.
+
+
+\begin{shaded}
+
+\begin{proof}[Disproof] We will show that the negation of this statement is true. Specifically, we will show that there exist integers $x$, $y$, $z$, and $k$ such that $z \neq 0$, $xz \equiv_k yz$, and $x \not\equiv_k y$.
+	
+	Let $x = 7$, $y = 0$, $z = 4$, and $k = 4$. Then there exists an integer $q$ (namely $7$) such that  $xz \equiv_k yz$, so we can see that $xz \equiv_k yz$.
+	
+	However, we also see that
+	\begin{equation*}
+	\begin{aligned}
+	7 & = 0 + 4q \\
+	\frac{7}{4} & = q.
+	\end{aligned}
+	\end{equation*}
+	Since $q$ is not an integer, we have $x \not\equiv_k y$ at the same time that we have $xz \equiv_k yz$, as required.
+\end{proof}	
+\end{shaded}
+
+\end{enumerate}
+
+\pagebreak
+
+\section{Properties of Sets}
+
+For each of these statements about sets, decide whether that statement is true or false. Prove each true statement, and disprove each false statement. \\
+
+We \emph{strongly} recommend reading the Guide to Set Theory Proofs before starting this problem.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Prove or disprove: for all sets $A$, $B$, and $C$,
+if $A \in B$ and $B \in C$, then $A \in C$.
+
+\begin{shaded}
+\begin{proof}[Disproof]
+	We will show that the negation of this statement is true. Specifically, we will show that there exist sets $A$, $B$, and $C$ such that $A \in B$ and $B \in C$, but $A \notin C$.
+	
+	Suppose $A = \{1\}$, $B = \wp(A)$, and $C = \wp(\wp(A))$. Then we have
+	\begin{equation*}
+	\begin{aligned}
+	A & = \{1\} \\
+	B & = \{\emptyset, \{1\}\} \\
+	C & = \{\emptyset, \{\emptyset\}, \{\{1\}\}, \{\emptyset, \{1\}\} \}
+	\end{aligned}
+	\end{equation*}
+	
+	Then $A \in B$ and $B \in C$, but $A \notin C$.
+\end{proof}
+
+\end{shaded}
+
+\item Prove or disprove: if $A$, $B$, and $C$ are sets where $A - C = B - C$, then $A = B$.
+
+\textit{\textcolor{blue}{A question you should be able to answer before starting this problem: how do you prove that two sets are equal to one another? Based on that, how do you prove that two sets are not equal to one another? Check the Guide to Proofs on Sets for details.}}
+
+\begin{shaded}
+\begin{proof}[Disproof] We will show that the negation of this statement is true. Specifically, we will show that there exist sets $A$, $B$, and $C$ such that $A - C = B - C$ and $A \neq B$.
+	
+	Let $A$, $B$, and $C$ be sets such that $A \subset C$, $B \subset C$, and $A \cap B = \emptyset$.
+	
+	First, we will show that $A - C \subseteq B - C$. Now consider an arbitrary $x \in A$. Since $A \subset C$, we know that $x \in C$. But since we know that $$A - C = \{x: x \in A \land x \notin C \},$$ then $x \notin A-C$. So $A - C = \emptyset$, and since $\emptyset \subseteq B - C$, $ A - C \subseteq B - C$. 
+	
+	Next, we will show that $B - C \subseteq A - C$. Now consider an arbitrary $x \in B$. Since $B \subset C$, we know that $x \in C$. But since we know that $$B - C = \{x: x \in B \land x \notin C \},$$ then $x \notin B-C$. So $B - C = \emptyset$, and since $\emptyset \subseteq A - C$, $ B - C \subseteq A - C$.
+	
+	Since $A - C \subseteq B - C$ and $B - C \subseteq A - C$, we conclude that $A - C = B - C$.
+	
+	We now show that $A \neq B$. Assume, for the sake of contradiction, that $A \subseteq B$. Pick an arbitrary $x \in A$. Then because $x \in A$ and $A \subseteq B$, then $x \in B$. But that would  mean that $x \in A \cap B$, and we know that $A \cap B = \emptyset$. Therefore, our assumption produces an absurdity, and we conclude that $A \not\subseteq B$.
+	
+	We conclude by a symmetrical argument that $B \not\subseteq A$, and so $A \neq B$.
+	
+	We have shown that there exist sets $A$, $B$, and $C$ such that $A - C = B - C$ and $A \neq B$, so the negation of the statement is true.
+\end{proof}
+\end{shaded}
+
+\item Prove or disprove: if $A$ and $B$ are sets where $\wp(A) = \wp(B)$, then $A = B$.
+
+\begin{shaded}
+\begin{proof}
+Suppose $A$ and $B$ are arbitrary sets and $\wp(A) = \wp(B)$. We will prove that $A = B$.
+
+First, we will show that $A \subseteq B$ by choosing an arbitrary element of $A$ and showing that it is in $B$. Consider an arbitrary $x \in A$. Then $x \in S$ for some set $S \in \wp(A)$, by the definition of the power set.
+
+Then, because $\wp(A) \subseteq \wp(B)$, we know that $S \in \wp(B)$. 
+
+By the definition of the power set, $S \subseteq A$. Since $S \subseteq A$ and $x \in S$, we know that $x \in A$. Likewise, since $S \subseteq B$ and $x \in S$, we know that $x \in B$. Therefore, we have shown that $x \in B$, as required to show that $A \subseteq B$.
+
+Now, we will show that $B \subseteq A$ by choosing an arbitrary element of $B$ and showing that it is in $A$. Consider an arbitrary $x \in B$. Then $x \in T$ for some set $T \in \wp(B)$, by the definition of the power set.
+
+Then, because $\wp(B) \subseteq \wp(A)$, we know that $T \in \wp(A)$.
+
+By the definition of the power set, $T \subseteq B$. Since $T \subseteq B$ and $x \in T$, we know that $x \in B$. Likewise, since $T \subseteq A$ and $x \in T$, we know that $x \in A$. Therefore, we have shown that $x \in A$, as required to show that $B \subseteq A$.
+
+
+Because we have demonstrated that $A \subseteq B$ and $B \subseteq A$, we conclude that $A = B$, as required.
+\end{proof}
+\end{shaded}
+
+\item Prove or disprove: if $A$, $B$, and $C$ are sets where $A \Delta C = B \Delta C$, then $A = B$.
+
+\begin{shaded}
+TODO
+
+\begin{proof}
+	Let $A$, $B$, and $C$ be arbitrary sets such that $A \Delta C = B \Delta C$. We will show that $A = B$.
+	
+	To prove $A = B$ we will show that $A \subseteq B$ and $B \subseteq A$.
+	
+	\emph{$A \subseteq B$:} Choose an arbitrary $x \in A$. Then either $x \in A - C$ or $x \in A \cap C$.
+	
+	If $x \in A - C$, we know that since $A \Delta C = B \Delta C$ and $x \notin C$ that $x \in B$.
+	
+	If $x \in A \cap C$, then in particular, we know that $x \in C$. Since $A \Delta C = B \Delta C$, $x \notin B \Delta C$. 
+	%That is, $x \notin B$ or $ x \in C$ and $x \in B$ or $ x \notin C$ 
+	
+	By negation of the definition of symmetric difference, either $x \in B$ and $x \in C$ or $x \notin B \cup C$. Since we know $x \in C$, it must be the case that $x \in B$ and $x \in C$. More specifically, we learn that $x \in B$.
+	
+	In either case, we have $x \in B$, so $A \subset B$.
+	
+	\emph{$B \subseteq A$:} Choose an arbitrary $x \in B$. 
+	Then either $x \in B - C$ or $x \in B \cap C$.
+	
+	If $x \in B - C$, we know that since $B \Delta C = A \Delta C$ and $x \notin C$ that $x \in A$.
+	
+	If $x \in B \cap C$, then in particular, we know that $x \in C$. Since $B \Delta C = A \Delta C$, $x \notin A \Delta C$. 
+	%That is, $x \notin B$ or $ x \in C$ and $x \in B$ or $ x \notin C$ 
+	
+	By negation of the definition of symmetric difference, either $x \in A$ and $x \in C$ or $x \notin A \cup C$. Since we know $x \in C$, it must be the case that $x \in A$ and $x \in C$. More specifically, we learn that $x \in A$.
+	
+	In either case, we have $x \in A$, so $B \subset A$.
+	
+	We have shown that $A \subseteq B$ and $B \subseteq A$, so we conclude that $A = B$.
+\end{proof}
+\end{shaded}
+
+\end{enumerate}
+
+\textit{\textcolor{blue}{ Before you turn in these proofs, read over the Proofwriting Checklist and the Guide to Proofs on Sets and
+confirm that your proof meets our style criteria. Here are a few specific things to look for:
+\begin{itemize}
+\item Make sure that the structures of your proofs match the definitions of the relevant terms. To prove $S \subseteq T$, pick an arbitrary $x \in S$, then prove $x \in T$ by making claims about $x$. To prove $S = T$, prove $S \subseteq T$ and $T \subseteq S$.
+\item However, avoid restating definitions in the abstract. For example, rather than writing
+\begin{center}
+``We know that $S \subseteq T$ if every element of $S$ is an element of $T$. \\
+Therefore, since we know that $A \subseteq B$ and $x \in A$, we see that $x \in B$.''
+\end{center}
+instead remove that first sentence and just write something like this:
+\begin{center}
+``Since $x \in A$ and $A \subseteq B$, we see that $x \in B$.''
+\end{center}
+Whoever is reading your proof knows all the relevant definitions. They're more interested in seeing
+\textbf{how those definitions interact with one another} than \textbf{what those definitions are}.
+\item Make sure you clearly indicate what each variable means and whether it's chosen arbitrarily or
+chosen to have a specific value. For example, if you refer to variables like A, B,
+or C, you should clearly indicate whether they're chosen arbitrarily or refer to specific values.
+\item When talking about an arbitrary set A, it's tempting to list off the elements of A by
+writing something like $A = \{ x_1, x_2, \ldots, x_n \}$. The problem is that writing
+$A = \{ x_1, x_2, \ldots, x_n \}$ implicitly says that the set $A$ is finite, since you're saying it only
+has $n$ elements in it. This is a problem if $A$ is infinite. In fact, if $A$ is infinite, because of
+Cantor's theorem, you can't necessarily even write $A = \{ x_1, x_2, x_3, \ldots \}$, since you might run out of
+natural numbers with which to name the elements of $A$!
+\end{itemize}
+}}
+
+\pagebreak
+
+\section{Tiling with Polyominoes}
+
+The game \textit{Tetris} involves working with seven shapes of tiles, each of which is made from exactly four squares. The pieces are shown here:
+
+\begin{figure}[H]
+\OMINO{
++-+\\
+|x|\\
+|-|.+---+.+-+...+-+...\\
+|x|.|x|x|.|x|...|x|...\\
+|-|.|-+-+.|-+-+.|-|.....+---+.+---+...+---+\\
+|x|.|x|...|x|x|.|x|.....|x|x|.|x|x|...|x|x|\\
+|-|.|-|...|-+-+.|-+-+.+-+-|-+.+-+-+-+.|---|\\
+|x|.|x|...|x|...|x|x|.|x|x|.....|x|x|.|x|x|\\
++-+.+-+...+-+...+---+.+---+.....+---+.+---+\\
+}
+\end{figure}
+
+We can use the Tetris pieces to \emph{tile} various geometric figures. In the context of recreational mathematics (yes, that's a thing!), ``tiling'' refers to covering up some underlying figure using tiles drawn from some collection of shapes. You're allowed to rotate and flip the tiles however you'd like, and you can assume you have as many copies of each tile as you need. You don't even need to use all the tiles. However, the tiles must cover the entire underlying figure, the tiles can't hang off of the original figure, and the tiles aren't allowed to overlap. For example, here's how we'd tile a $3 \times 4$ chessboard, a $4 \times 6$ chessboard, and a $5 \times 8$ chessboard with Tetris pieces:
+
+\begin{figure}[H]
+\OMINO{
+........................+-+-----+-----+-+\\
+........................|x|xxxxx|xxxxx|x|\\
+..........+---+-------+.|x+---+x+-+x+-+x|\\
+..........|xxx|xxxxxxx|.|x|xxx|x|x|x|xxx|\\
++---+---+.|x+-+-+-----+.|x+-+x+-+x+-+-+x|\\
+|xxx|xxx|.|x|xxx|xxxxx|.|xxx|xxx|xxx|x|x|\\
+|x+-+-+x+.|x+-+x+-+x+-+.+---+-----+x|x+-+\\
+|x|xxx|x|.|x|x|xxx|x|x|.|xxx|xxxxx|x|xxx|\\
+|x|xxx|x|.+-+x+---+-+x+.|xxx|x+---+-+-+x|\\
+|x|xxx|x|.|xxxxx|xxxxx|.|xxx|x|xxxxxxx|x|\\
++-+---+-+.+-----+-----+.+---+-+-------+-+
+}
+\end{figure}
+
+Mathematicians and computer scientists have spent a lot of time thinking about what sorts of tilings are possible, and what sorts of tilings are impossible. For example, in the \href{http://web.stanford.edu/class/cs103//handouts/Mathematical\%20Foundations\%20of\%20Computing.pdf#page=60}{course notes} (pages 60 - 61), there's a proof that it's impossible to tile an $8 \times 8$ chessboard missing two opposite corners using $2 \times 1$ tiles.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Prove or disprove: it's possible to tile a $9 \times 10$ chessboard with Tetris pieces.
+
+\begin{shaded}
+
+
+\begin{proof}[Disproof]
+	It is not possible to tile a $9 \times 10$ chessboard with Tetris pieces.
+	
+	To prove that it is not possible to tile a $9 \times 10$ chessboard with Tetris pieces, we need to show that there exist no configurations of Tetris pieces that exactly tile a $9 \times 10$ chessboard.
+	
+	Suppose that we have a $9 \times 10$ chessboard, and infinitely many Tetris pieces. This $9 \times 10$ chessboard has 90 squares to cover. Each Tetris piece covers 4 squares in area. So, to perfectly tile a 90-square chessboard, at a minimum, it would need to be the case that $90 \div 4 = n$ for some integer $n$. But $90 \div 4 = \frac{45}{2}$. Because $90$ is not evenly divisible by $4$, we conclude that there is no valid tiling of a $9 \times 10$ chessboard with Tetris pieces.
+	
+\end{proof}
+
+\end{shaded}
+
+\end{enumerate}
+
+Up to this point, we've assumed you have as many copies of each Tetris piece as you'd like. There's a more restricted kind of tiling called a perfect tiling in which you get exactly one copy of each tile, and you're required to form a tiling using exactly one copy of each tile. None of the above tilings are perfect.
+
+\begin{enumerate}[resume*]
+
+\item Prove or disprove: it's possible to perfectly tile a $4 \times 7$ chessboard with the seven Tetris pieces.
+
+\begin{shaded}
+\begin{proof}[Disproof]
+	It is not possible to perfectly tile a $4 \times 7$ chessboard with one each of the seven Tetris pieces.
+	
+	Suppose that we have a $4 \times 7$ chessboard and one each of the seven Tetris pieces. A $4 \times 7$ chessboard has $28$ squares: $14$ black and $14$ white. Of the $7$ Tetris pieces, $6$ of them always cover $2$ white squares and $2$ black squares; however, the third piece will always cover $3$ black and $2$ white, or else $2$ white and $3$ black squares. So, the $7$ Tetris pieces together can cover $15$ black squares and $13$ white squares, or else $13$ white squares and $15$ black squares. Either way, they cannot tile a $4 \times 7$ chessboard.
+	
+\end{proof}
+\end{shaded}
+
+\end{enumerate}
+
+\pagebreak
+
+\section{Yablo's Paradox}
+
+A \emph{logical paradox} is a statement that results in a contradiction
+regardless of whether it's true or false.
+One of the simplest paradoxes is the \emph{Liar's paradox},
+which is the following:
+\begin{center}
+\emph{This statement is false.}
+\end{center}
+If this statement is true,
+then by its own admission, it must be false -- a contradiction!
+On the other hand, if the above statement is false, then the statement ``This statement is false'' is false, and therefore the
+statement ``This statement is false'' is true -- a contradiction!
+Since this statement results in a contradiction regardless of whether
+it's true or false, it's a paradox. \\
+
+Paradoxes often arise as a result of self-reference.
+In the Liar's Paradox,
+the paradox arises because the statement itself directly refers to itself.
+However, it's not the only paradox that can arise from self-reference.
+This problem explores a paradox called \emph{Yablo's paradox}. \\
+
+Consider the following collection of infinitely many statements numbered
+$S_0, S_1, S_2,\dots,$ where there is a statement $S_n$ for each
+natural number $n$.
+These statements are ordered in a list as follows:
+
+\begin{mdframed}[backgroundcolor=yellow!20] 
+\begin{center}
+$(S_0)$: All statements in this list after this one are false. \\
+$(S_1)$: All statements in this list after this one are false. \\
+$(S_2)$: All statements in this list after this one are false. \\
+$\cdots$
+\end{center}
+\end{mdframed}
+
+More generally, for each $n \in \N$, the statement $(S_n)$ is
+\begin{center}
+$(S_n)$: All statements in this list after this one are false.
+\end{center}
+Surprisingly,
+the interplay between these statements makes every statement in the list
+a paradox.
+
+\begin{enumerate}[label*=\roman*.,ref=\roman*]
+
+\item Prove that if any statement in this list is true, it results in a contradiction.
+
+\end{enumerate}
+
+\textit{\textcolor{blue}{Your result needs to work for any choice of statement in the list, not just one of them. Follow the template for proving a universally-quantified statement}}
+
+\begin{shaded}
+\begin{proof}
+	Assume some arbitrary statement in this list, $S_n$, is true. Then it follows that $S_{(n+1)})$ is false. If $S_{(n+1)}$ is false, then there exists some $S_i$ for some number $i > n + 1$ such that $S_i$ is also true. But if $S_n$ is true, and $S_i$ is true, and $i > n + 1 > n$, then $S_i$ is both true and false at the same time. This constitutes a logical impossibility, so $S_i$ must be false.
+	
+	However, if $S_i$ is false, then if $S_{(i+1)}, S_{(i+2)}, S_{(i+3)}, \ldots$ are false, it means $S_i$ (and each subsequent statement) was true after all. So, we find that the list produces a contradiction---all the statements are both true and false at the same time.
+\end{proof}
+\end{shaded}
+
+\begin{enumerate}[resume*]
+
+\item Prove that every statement in this list is a paradox. 
+
+\end{enumerate}
+
+\textit{\textcolor{blue}{Something to ponder: how do you negate a universally-quantified statement?}} \\
+
+\begin{shaded}
+\begin{proof} We will show that every statement in this list is a paradox by showing that any arbitrary element of the list produces a contradiction whether it is true or false.
+	
+	Assume some arbitrary statement in this list, $S_n$, is true. Then it follows that $S_{(n+1)})$ is false. If $S_{(n+1)}$ is false, then there exists some $S_i$ for some number $i > n + 1$ such that $S_i$ is also true. But if $S_n$ is true, and $S_i$ is true, and $i > n + 1 > n$, then $S_i$ is both true and false at the same time. This constitutes a logical impossibility, so $S_i$ must be false.
+	
+	However, if $S_i$ is false, then if $S_{(i+1)}, S_{(i+2)}, S_{(i+3)}, \ldots$ are false, it means $S_i$ (and each subsequent statement) was true after all. So, we find that the list produces a contradiction---all the statements are both true and false at the same time.
+	
+	Now, assume $S_n$ is false. Then there is some $S_i$ for some number $i > n$ such that $S_i$ is true. But if $S_i$ is true, then $S_{(i+1)}, S_{(i+1)}, S_{(i+1)}, \ldots$ are false. But if this is true, then $S_n$ was true after all, producing a contradiction.
+	
+	Since $S_n$ produces a contradiction whether it is true or false, it is a paradox.
+\end{proof}
+\end{shaded}
+
+Now, consider the following modification to this list.
+Instead of infinitely many statements,
+suppose that there are ``only'' $10,000,000,000$ statements.
+Specifically, suppose we have these statements:
+\begin{mdframed}[backgroundcolor=yellow!20] 
+\begin{center}
+$(T_0)$: All statements in this list after this one are false. \\
+$(T_1)$: All statements in this list after this one are false. \\
+$(T_2)$: All statements in this list after this one are false. \\
+$\cdots$ \\
+$(T_{9,999,999,999})$: All statements in this list after this one are false.
+\end{center}
+\end{mdframed}
+There's still a lot of statements here,
+but not infinitely many of them.
+Interestingly,
+these statements are all perfectly consistent with one another and do not
+result in any paradoxes.
+
+\begin{enumerate}[resume*]
+
+\item For each statement in the above list,
+determine whether it's true or false and explain why
+your choices are consistent with one another.
+
+\begin{shaded}
+Consider $T_9,999,999,999$. Since it is the last element in the list, it is vacuously true, since there are no subsequent statements.
+
+Then $T_9,999,999,998$ must be false, since we know that $T_9,999,999,999$ is true. By induction, we can conclude that the rest of the statements in the list, $T_0, T_1, \ldots, T_9,999,998$ are false.
+\end{shaded}
+
+\end{enumerate}
+
+Going forward, don't worry about paradoxical statements in CS103.
+We won't talk about any more statements like these.
+\smiley
+
+\pagebreak
+
+
+
+\annotate{On each problem set, we'll provide some optional fun problems for extra credit. Note: in terms of grades, putting more effort into the rest of the problem set is almost certainly more helpful than putting time in here. These are additional explorations for enrichment, not extra credit opportunities to bump up your grade. These are problems that can be solved purely using the techniques you've learned so far, but which will require some thought. Each problem, in our opinion, has a beautiful solution that will give you a much deeper understanding of core concepts, so we strongly encourage you to play around with them if you get the chance. Please feel free to work on as many of these problem as you'd like, though please only submit a solution to at most {\bf one} of the optional fun problems on each problem set.} \\
+
+\annotate{When we compute final grades at the end of the quarter, we compute the grading curve without any extra credit factored in, then recompute grades a second time to factor in extra credit. This way, you're not at any disadvantage if you decide not to work through these problems. If you do complete the extra credit problems, you may get a slight boost to your overall grade.} \\
+
+\annotate{As a matter of course policy, we don't provide any hints on the extra credit problems -- after all, they're supposed to be challenge problems! However, we're happy to chat about them after the problem sets come due.}
+
+\section*{Optional Fun Problem One : Hat Colors}
+
+You and nine of your friends are brought into a room together. The CS103 TAs go around and place a hat on everyone's head. There are ten different colors of hats -- red, orange, yellow, green, blue, magenta, black, white, gray, and gold. It's possible that everyone gets a hat of a different color. It's possible that everyone gets a hat of the same color. In fact, aside from the restriction that each hat is one of the ten colors mentioned earlier, there are no restrictions about how many hats there are of each color. \\
+
+You and your friends can all look around to see what color hats everyone else is wearing, but no one can see their own hat color. The staff will then go around and ask everyone to write down a guess of what color their hat is. We'll then collect those guesses and reveal them all at once. You and your friends succeed if at least one of you is able to correctly guess their own hat color. You and your friends all lose if no one correctly guesses their own hat color. \\
+
+Before we place hats on everyone, we'll allow you and your friends to work out a strategy about how you're going to guess, but once the hats are on no communication of any kind - whether explicit or implicit - is permitted between the group. Devise a strategy that \textit{guarantees} at least one person will correctly guess their own hat color, even if we know what strategy you'll be using. Then, using the mathematical notation and tools you've learned so far in this course, formally prove that your strategy works. For example, here are a few strategies you could choose from that \textit{don't} work: 
+\begin{itemize}
+    \item Everyone could pick which color they're going to guess before going into the room, and then write down that guess regardless of what color hats they see on everyone else. If we assign hats randomly, then the probability that this works is approximately $1 - e^{-1}$ (take CS109 if you're curious why this is!) However, if we overhear your discussion, we could be mean and deliberately give everyone the wrong hat color, making your probability of success exactly 0.
+    
+    \item Everyone could arrange themselves in a circle, then guess the color of the hat of the person immediately to their left. If we choose hat colors randomly, then there's a decent probability that someone will correctly guess their own hat color. But if we know that this is what you're going to do, we can just give everyone a different hat color and you're guaranteed to lose
+    
+\end{itemize}
+
+\annotate{I first heard this problem from Michelle McGhee, CS major (theory track), storyteller, and Ultimate Frisbee player, when she was helping staff Girl Code @Stanford in 2018. Her senior project was a program that generated freestyle rap lyrics.}
+
+\begin{shaded}
+Provide a description of your strategy and a proof that it works here.
+\end{shaded}
+
+\section*{Optional Fun Problem Two: Infinite Deviation}
+
+In our first class meeting, we sketched out a proof of Cantor's theorem. If you'll recall, this proof worked by assuming there was a pairing between the elements of a set $S$ and the subsets of that set $S$, then constructing a set that was different in at least one position from each of the paired sets. \\
+
+Suppose you try to pair off the elements of $\mathbb{N}$ with the subsets of $\mathbb{N}$. Show that, no matter how you do this, there's always at least one set $X \subseteq \mathbb{N}$ that differs in infinitely many positions from each of the paired sets. Justify your answer, but no formal proof is necessary.
+
+\begin{shaded}
+Write your answer here.
+\end{shaded}
+
+\end{document}
